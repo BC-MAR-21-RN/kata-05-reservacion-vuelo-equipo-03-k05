@@ -31,9 +31,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
           name="Login"
-          options={({navigation}) => optionsBack(navigation)}
+          options={{headerShown: false}}
           component={LayoutLogin}
         />
         <Stack.Screen
