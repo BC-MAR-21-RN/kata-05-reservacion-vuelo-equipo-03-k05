@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, Text, View, Image, TouchableOpacity} from 'react-native';
-import CustomButton from './Button';
-import Checkbox from './Checkbox';
-import InputConfigurable from './InputConfigurable';
+import {SafeAreaView, ScrollView} from 'react-native';
+import InputsContainer from './InputsContainer';
 import {LayoutLoginStyles as styles} from './styles';
 import {useInput, useLogin} from '../../library/hooks';
 import {useSingIn} from '../../library/hooks/useSingUpLogIn';
 import {useCheckBox} from '../../library/hooks/useInput';
-import eye from '../../library/assets/icons/eye.png';
+import ButtonContainer from './ButtonContainer';
 const LayoutLogin = () => {
   const [nameProps] = useInput('');
   const [emailProps] = useInput('');
@@ -29,63 +27,22 @@ const LayoutLogin = () => {
   return (
     <ScrollView style={styles.mainContainer}>
       <SafeAreaView />
-      <View style={styles.textInputContainer}>
-        <Text style={styles.titleText}>{login ? 'Log In' : 'Sing Up'}</Text>
-        <InputConfigurable {...nameProps} hidden={login} title="First Name" />
-        <InputConfigurable {...emailProps} title="Email *" />
-        <InputConfigurable
-          {...passwordProps}
-          secureTextEntry={isShowingPassword}
-          title="Password *"
-          downText={
-            login
-              ? ''
-              : 'Use 8 or more characters with a mix of letters, numbers and symbols'
-          }>
-          <TouchableOpacity onPress={()=>setIsShowingPassword(!isShowingPassword)} style={styles.icons}>
-            <Image source={eye} style={styles.icons} resizeMode="contain" />
-          </TouchableOpacity>
-        </InputConfigurable>
-      </View>
-      <View style={styles.buttonContainer}>
-        {!login && (
-          <Checkbox
-            {...privacyProps}
-            requiered
-            text="I agree to the Terms and Privacy Policy."
-          />
-        )}
-        {!login && (
-          <Checkbox
-            {...subscribeProps}
-            text="Subscribe for select products updates."
-          />
-        )}
-        <View style={styles.buttonArea}>
-          <CustomButton
-            onPress={() => handlePress()}
-            disabled={permisionToInteract}
-            text={login ? 'Log In' : 'Sign Up '}
-          />
-          <Text>or</Text>
-          <CustomButton
-            disabled={permisionToInteract}
-            text={login ? 'Log In with Google' : 'Sign Up with Google'}
-          />
-          <View style={styles.footerContainer}>
-            <Text>
-              {`${
-                login
-                  ? "Don't you have an account?"
-                  : 'Already have an account?'
-              } `}
-            </Text>
-            <Text style={styles.textLink} onPress={() => setLogin(!login)}>
-              {login ? 'Sing Up' : 'Log In'}
-            </Text>
-          </View>
-        </View>
-      </View>
+      <InputsContainer
+        login={login}
+        nameProps={nameProps}
+        emailProps={emailProps}
+        passwordProps={passwordProps}
+        isShowingPassword={isShowingPassword}
+        setIsShowingPassword={setIsShowingPassword}
+      />
+      <ButtonContainer
+        login={login}
+        privacyProps={privacyProps}
+        subscribeProps={subscribeProps}
+        permisionToInteract={permisionToInteract}
+        handlePress={handlePress}
+        setLogin={setLogin}
+      />
     </ScrollView>
   );
 };

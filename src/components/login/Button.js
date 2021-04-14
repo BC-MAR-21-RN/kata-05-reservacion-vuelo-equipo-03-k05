@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {buttonStyles as styles} from './styles';
 const CustomButton = ({text, disabled, ...rest}) => {
@@ -6,7 +6,7 @@ const CustomButton = ({text, disabled, ...rest}) => {
     <TouchableOpacity
       disabled={disabled}
       {...rest}
-      style={disabled ? styles.disabled : styles.button}>
+      style={{ ...styles.button,...(disabled && styles.disabled),}}>
       <Text style={styles.textButton}>{text}</Text>
     </TouchableOpacity>
   );

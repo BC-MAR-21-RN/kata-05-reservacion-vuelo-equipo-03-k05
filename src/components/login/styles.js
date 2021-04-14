@@ -8,6 +8,9 @@ export const LayoutLoginStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
+});
+
+export const inputsContainerStyles = StyleSheet.create({
   textInputContainer: {
     flex: 1,
     display: 'flex',
@@ -22,6 +25,14 @@ export const LayoutLoginStyles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 10,
   },
+  icons: {
+    width: 20,
+    height: 20,
+    tintColor: 'black',
+  },
+});
+
+export const buttonContainerStyles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -43,11 +54,6 @@ export const LayoutLoginStyles = StyleSheet.create({
     color: colors.purple,
     textDecorationLine: 'underline',
   },
-  icons: {
-    width: 20,
-    height: 20,
-    tintColor: 'black',
-  },
 });
 
 export const buttonStyles = StyleSheet.create({
@@ -62,14 +68,7 @@ export const buttonStyles = StyleSheet.create({
     marginVertical: 20,
   },
   disabled: {
-    height: 40,
-    width: '90%',
-    borderRadius: 10,
     backgroundColor: colors.grey,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginVertical: 20,
   },
   textButton: {
     color: 'white',
@@ -126,7 +125,7 @@ export const InputConfigurableStyles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     paddingRight: 20,
     borderColor: 'black',
     backgroundColor: 'white',
@@ -137,6 +136,6 @@ export const InputConfigurableStyles = StyleSheet.create({
   },
   focused: {
     borderColor: colors.purple,
-    borderWidth:2
+    borderWidth: 2,
   },
 });

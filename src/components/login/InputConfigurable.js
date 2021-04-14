@@ -6,11 +6,11 @@ const InputConfigurable = ({title, downText, hidden, children, ...rest}) => {
   return (
     <View style={{...styles.mainContainer, ...(hidden && styles.hide)}}>
       <Text style={styles.titleText}>{title}</Text>
-      <View style={{  ...styles.searchContainer ,...isFocused&&styles.focused}}>
+      <View
+        style={{...styles.searchContainer, ...(isFocused && styles.focused)}}>
         <TextInput
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-       
           {...rest}
           style={styles.textInput}
         />
