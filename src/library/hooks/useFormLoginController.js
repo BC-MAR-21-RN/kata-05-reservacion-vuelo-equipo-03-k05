@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {useCheckBox, useInput, useLogin, useSingIn} from '.';
 
-import {useLogin, useSingIn} from './useSingUpLogIn';
 
 export const useFormLoginController = inputs => {
   const [ableLogIn] = useLogin(
