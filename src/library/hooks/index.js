@@ -1,3 +1,4 @@
 import {useInput} from './useInput';
 import {useLogin} from './useSingUpLogIn';
-export {useInput, useLogin};
+import {useFormLoginController} from './useFormLoginController';
+export {useInput, useLogin, useFormLoginController};
