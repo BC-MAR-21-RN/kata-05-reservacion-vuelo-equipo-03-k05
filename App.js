@@ -1,4 +1,5 @@
 import React from 'react';
+import {LayoutLogin} from './src/container/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
@@ -30,6 +31,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          options={{headerShown: false}}
+          component={LayoutLogin}
+        />
         <Stack.Screen
           name="BookingFrom"
           options={({navigation}) => optionsBack(navigation)}
