@@ -13,19 +13,17 @@ const ButtonContainer = ({
 }) => {
   return (
     <View style={styles.buttonContainer}>
-      {!login && (
-        <Checkbox
-          {...privacyProps}
-          requiered
-          text="I agree to the Terms and Privacy Policy."
-        />
-      )}
-      {!login && (
-        <Checkbox
-          {...subscribeProps}
-          text="Subscribe for select products updates."
-        />
-      )}
+      <Checkbox
+        disabled={login}
+        {...privacyProps}
+        requiered
+        text="I agree to the Terms and Privacy Policy."
+      />
+      <Checkbox
+        disabled={login}
+        {...subscribeProps}
+        text="Subscribe for select products updates."
+      />
       <View style={styles.buttonArea}>
         <CustomButton
           onPress={() => handlePress()}
