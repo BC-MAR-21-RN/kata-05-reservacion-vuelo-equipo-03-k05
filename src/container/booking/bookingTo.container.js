@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
-import {
-  View,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Platform,
-} from 'react-native';
+import {View} from 'react-native';
 import {ButtonNext, Location, Reservation} from '../../components/booking';
+import {KeyboardAvoidWrapper} from '../../components/general';
 import {general} from './styles';
 const BookingTo = props => {
   const [location, setLocation] = useState('');
@@ -22,25 +17,20 @@ const BookingTo = props => {
     setLocation(city);
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={-70}
-      style={general.generalContainer}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={general.viewArea}>
-          <View>
-            <Reservation origin={props.route.params.Origin[1]} />
-            <Location
-              text="Where will you be flying to?"
-              inputState={location}
-              changeState={changeLocation}
-              active={active}
-            />
-          </View>
-          <ButtonNext functionNext={next} active={active} />
+    <KeyboardAvoidWrapper styleWrapper={general.generalContainer}>
+      <View style={general.viewArea}>
+        <View>
+          <Reservation origin={props.route.params.Origin[1]} />
+          <Location
+            text="Where will you be flying to?"
+            inputState={location}
+            changeState={changeLocation}
+            active={active}
+          />
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        <ButtonNext functionNext={next} active={active} />
+      </View>
+    </KeyboardAvoidWrapper>
   );
 };
 

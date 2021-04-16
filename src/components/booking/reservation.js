@@ -13,7 +13,7 @@ const Reservation = ({
   const styles = reservationStyle(emptyR);
   return (
     <View style={styles.container}>
-      <View style={styles.cityContainer}>
+      <View style={{...styles.cityContainer, ...styles.dpContainer}}>
         <View>
           <Text style={styles.begAms}>{origin ? 'BEG' : ''}</Text>
           <Text style={styles.city}>{origin}</Text>

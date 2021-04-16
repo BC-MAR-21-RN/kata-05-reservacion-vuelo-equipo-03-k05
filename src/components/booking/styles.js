@@ -1,16 +1,23 @@
-import {StyleSheet} from 'react-native';
-export const buttonNext = (pd = 12, colorButton = '#5c6ef8') => {
+import {StyleSheet, Dimensions} from 'react-native';
+const screenWidth = Dimensions.get('window').width;
+export const buttonNext = (pd = 12, colorActive, roundButton, position) => {
   return StyleSheet.create({
     buttonContainer: {
       padding: pd,
       justifyContent: 'flex-end',
+      alignItems: 'center',
+      position: position,
+      height: 100,
+      bottom: position === 'absolute' ? 20 : 0,
+      left: position === 'absolute' ? screenWidth / 2 - 40 : 0,
     },
     buttonStyle: {
-      borderRadius: 10,
+      borderRadius: roundButton ? 50 : 10,
+      width: roundButton ? 50 : '100%',
       borderWidth: 1,
-      borderColor: colorButton,
+      borderColor: colorActive ? '#5c6ef8' : '#b6b7ba',
       padding: 10,
-      backgroundColor: colorButton,
+      backgroundColor: colorActive ? '#5c6ef8' : '#b6b7ba',
       textAlign: 'center',
       justifyContent: 'center',
     },
@@ -45,21 +52,23 @@ export const reservationStyle = emptyR => {
     container: {
       marginLeft: 20,
       marginRight: 20,
-      justifyContent: 'space-between',
-      alignItems: 'center',
       marginBottom: 30,
     },
     cityContainer: {
-      flexDirection: 'row',
-      width: '100%',
       borderBottomColor: '#b6b7ba',
-      justifyContent: 'space-between',
       alignItems: 'center',
       borderBottomWidth: emptyR ? 0 : 0.7,
+    },
+    dpContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     planeIcon: {
       color: '#5c6ef8',
       display: emptyR ? 'none' : 'flex',
+      position: 'absolute',
+      left: screenWidth / 2 - 20,
     },
     begAms: {
       fontSize: 20,
@@ -72,12 +81,7 @@ export const reservationStyle = emptyR => {
       color: '#b6b7ba',
       marginBottom: 5,
       fontSize: 12,
-    },
-    dpContainer: {
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
+    }    
   });
 };
 

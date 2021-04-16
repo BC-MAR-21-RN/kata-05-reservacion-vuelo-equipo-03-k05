@@ -16,7 +16,6 @@ const BookingPassenger = props => {
   };
   const passengerChange = item => {
     setSelectedItem(item);
-    console.log(item);
   };
   return (
     <View style={general.generalContainer}>

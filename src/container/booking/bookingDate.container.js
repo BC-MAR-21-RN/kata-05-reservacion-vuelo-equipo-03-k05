@@ -15,7 +15,6 @@ const BookingDate = props => {
   };
   const dateChange = date => {
     setDateSelected(date ? date.toString() : date);
-    console.log(date);
   };
   return (
     <View style={general.generalContainer}>

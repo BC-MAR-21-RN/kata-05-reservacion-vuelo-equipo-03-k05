@@ -8,7 +8,6 @@ const BookingResults = props => {
       Destination: props.route.params.Destination,
       dateFormat: props.route.params.dateFormat,
       numberPassengers: props.route.params.numberPassengers,});*/
-    console.log('reserva hecha');
   };
   return (
     <View style={general.generalContainer}>

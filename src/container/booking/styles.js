@@ -8,6 +8,14 @@ export const general = StyleSheet.create({
   viewArea: {
     flex: 1,
     justifyContent: 'space-between',
+    backgroundColor: 'white',
+  },
+  tittle: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    width: '80%',
+    color: '#5c6ef8',
+    marginLeft: 10,
   },
 });
 
