@@ -81,7 +81,7 @@ export const reservationStyle = emptyR => {
       color: '#b6b7ba',
       marginBottom: 5,
       fontSize: 12,
-    }    
+    },
   });
 };
 
