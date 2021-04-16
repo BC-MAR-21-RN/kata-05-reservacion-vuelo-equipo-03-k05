@@ -7,75 +7,59 @@ import {general} from './styles';
 const listReservation = [
   {
     id: 'id1',
-    cityTo: 'Cartagena',
-    countryTo: 'Colombia',
-    cityFrom: 'Tokio',
-    countryFrom: 'Japon',
+    origin: {city: 'Cartagena', country: 'Colombia'},
+    destination: {city: 'Tokio', country: 'Japan'},
     date: 'December 22, 2021',
-    passengers: 2,
+    passengers: 3,
   },
   {
     id: 'id2',
-    cityTo: 'Bogotá',
-    countryTo: 'Colombia',
-    cityFrom: 'Colima',
-    countryFrom: 'Mexico',
+    origin: {city: 'Bogotá', country: 'Colombia'},
+    destination: {city: 'Colima', country: 'Mexico'},
     date: 'September 12, 2021',
-    passengers: 2,
+    passengers: 1,
   },
   {
     id: 'id3',
-    cityTo: 'Cali',
-    countryTo: 'Colombia',
-    cityFrom: 'Mexico',
-    countryFrom: 'Mexico',
+    origin: {city: 'Cali', country: 'Colombia'},
+    destination: {city: 'Mexico', country: 'Mexico'},
     date: 'April 23, 2022',
     passengers: 2,
   },
   {
     id: 'id4',
-    cityTo: 'Pereira',
-    countryTo: 'Colombia',
-    cityFrom: 'Colima',
-    countryFrom: 'Mexico',
+    origin: {city: 'Pereira', country: 'Colombia'},
+    destination: {city: 'Colima', country: 'Mexico'},
     date: 'April 23, 2022',
-    passengers: 2,
+    passengers: 4,
   },
   {
     id: 'id5',
-    cityTo: 'Barranquilla',
-    countryTo: 'Colombia',
-    cityFrom: 'San Juan',
-    countryFrom: 'Puerto Rico',
+    origin: {city: 'Barranquilla', country: 'Colombia'},
+    destination: {city: 'San Juan', country: 'Puerto Rico'},
     date: 'April 23, 2022',
     passengers: 2,
   },
   {
     id: 'id6',
-    cityTo: 'Madrid',
-    countryTo: 'Spain',
-    cityFrom: 'San Andres',
-    countryFrom: 'Colombia',
+    origin: {city: 'Madrid', country: 'Spain'},
+    destination: {city: 'San Andres', country: 'Colombia'},
     date: 'April 23, 2022',
-    passengers: 2,
+    passengers: 1,
   },
   {
     id: 'id7',
-    cityTo: 'Barcelona',
-    countryTo: 'Spain',
-    cityFrom: 'Medellin',
-    countryFrom: 'Colombia',
+    origin: {city: 'Barcelona', country: 'Spain'},
+    destination: {city: 'Medellin', country: 'Colombia'},
     date: 'April 23, 2022',
     passengers: 2,
   },
   {
     id: 'id8',
-    cityTo: 'Santiago',
-    countryTo: 'Chile',
-    cityFrom: 'Cartagena',
-    countryFrom: 'Colombia',
+    origin: {city: 'Santiago', country: 'Chile'},
+    destination: {city: 'Cartagena', country: 'Colombia'},
     date: 'April 23, 2022',
-    passengers: 2,
+    passengers: 3,
   },
 ];
 const BookingList = props => {
@@ -83,15 +67,7 @@ const BookingList = props => {
     props.navigation.navigate('BookingFrom');
   };
   const reservations = ({item}) => {
-    return (
-      <Reservation
-        key={item.id}
-        origin={item.countryFrom}
-        destination={item.countryTo}
-        date={item.date}
-        passengers={item.passengers}
-      />
-    );
+    return <Reservation {...item} />;
   };
   return (
     <View style={general.generalContainer}>

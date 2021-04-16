@@ -4,8 +4,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlane} from '@fortawesome/free-solid-svg-icons';
 import {reservationStyle} from './styles';
 const Reservation = ({
-  origin = '',
-  destination = '',
+  origin = {city: '', country: ''},
+  destination = {city: '', country: ''},
   emptyR = false,
   date = '',
   passengers = '',
@@ -15,15 +15,15 @@ const Reservation = ({
     <View style={styles.container}>
       <View style={{...styles.cityContainer, ...styles.dpContainer}}>
         <View>
-          <Text style={styles.begAms}>{origin ? 'BEG' : ''}</Text>
-          <Text style={styles.city}>{origin}</Text>
+          <Text style={styles.begAms}>{origin.city ? 'BEG' : ''}</Text>
+          <Text style={styles.city}>{origin.city}</Text>
         </View>
         <FontAwesomeIcon icon={faPlane} style={styles.planeIcon} />
         <View>
           <Text style={{...styles.begAms, ...styles.ams}}>
-            {destination ? 'AMS' : ''}
+            {destination.city ? 'AMS' : ''}
           </Text>
-          <Text style={styles.city}>{destination}</Text>
+          <Text style={styles.city}>{destination.city}</Text>
         </View>
       </View>
       <View style={styles.dpContainer}>
