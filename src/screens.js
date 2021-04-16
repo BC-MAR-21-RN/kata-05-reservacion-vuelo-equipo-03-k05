@@ -7,6 +7,7 @@ import {
   BookingPassenger,
   BookingResults,
 } from './container';
+import {LayoutLogin} from './container/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 export const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ const optionsBack = navigation => ({
 });
 
 const listScreens = [
+  {name: 'Login', component: LayoutLogin, back: false},
   {name: 'BookingList', component: BookingList, back: false},
   {name: 'BookingFrom', component: BookingFrom, back: true},
   {name: 'BookingTo', component: BookingTo, back: true},
