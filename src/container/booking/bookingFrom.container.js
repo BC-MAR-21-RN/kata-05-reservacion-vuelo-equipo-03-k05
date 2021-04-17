@@ -10,10 +10,6 @@ const BookingFrom = props => {
   const next = () => {
     props.navigation.navigate('BookingTo', {origin: location});
   };
-  const changeLocation = locate => {
-    locate.city && locate.country ? setActive(true) : setActive(false);
-    setLocation(locate);
-  };
   return (
     <KeyboardAvoidWrapper styleWrapper={general.generalContainer}>
       <View style={general.viewArea}>
@@ -22,7 +18,8 @@ const BookingFrom = props => {
           <Location
             text="Where are you now?"
             inputState={location}
-            changeState={changeLocation}
+            setActive={setActive}
+            setLocation={setLocation}
             active={active}
           />
         </View>
