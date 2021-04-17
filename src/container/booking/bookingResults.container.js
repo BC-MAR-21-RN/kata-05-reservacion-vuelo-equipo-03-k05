@@ -13,9 +13,7 @@ const BookingResults = props => {
     <View style={general.generalContainer}>
       <View style={resultContainer.result}>
         <Reservation
-          origin={props.route.params.Origin[1]}
-          destination={props.route.params.Destination[1]}
-          date={props.route.params.dateFormat}
+          {...props.route.params}
           passengers={`${props.route.params.numberPassengers} passengers`}
         />
         <Text style={resultContainer.text}>Your request was received.</Text>

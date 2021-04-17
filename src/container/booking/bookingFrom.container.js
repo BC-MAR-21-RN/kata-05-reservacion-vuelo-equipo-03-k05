@@ -3,15 +3,16 @@ import {View} from 'react-native';
 import {ButtonNext, Location, Reservation} from '../../components/booking';
 import {KeyboardAvoidWrapper} from '../../components/general';
 import {general} from './styles';
+
 const BookingFrom = props => {
   const [location, setLocation] = useState('');
   const [active, setActive] = useState(false);
   const next = () => {
-    props.navigation.navigate('BookingTo', {Origin: location.split(', ', 2)});
+    props.navigation.navigate('BookingTo', {origin: location});
   };
-  const changeLocation = city => {
-    city.includes(', ') ? setActive(true) : setActive(false);
-    setLocation(city);
+  const changeLocation = locate => {
+    locate.city && locate.country ? setActive(true) : setActive(false);
+    setLocation(locate);
   };
   return (
     <KeyboardAvoidWrapper styleWrapper={general.generalContainer}>

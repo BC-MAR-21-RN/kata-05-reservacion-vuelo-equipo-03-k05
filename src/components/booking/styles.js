@@ -1,5 +1,8 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {colors} from '../../library/styles/global';
+
 const screenWidth = Dimensions.get('window').width;
+
 export const buttonNext = (pd = 12, colorActive, roundButton, position) => {
   return StyleSheet.create({
     buttonContainer: {
@@ -7,7 +10,6 @@ export const buttonNext = (pd = 12, colorActive, roundButton, position) => {
       justifyContent: 'flex-end',
       alignItems: 'center',
       position: position,
-      height: 100,
       bottom: position === 'absolute' ? 20 : 0,
       left: position === 'absolute' ? screenWidth / 2 - 40 : 0,
     },
@@ -15,9 +17,9 @@ export const buttonNext = (pd = 12, colorActive, roundButton, position) => {
       borderRadius: roundButton ? 50 : 10,
       width: roundButton ? 50 : '100%',
       borderWidth: 1,
-      borderColor: colorActive ? '#5c6ef8' : '#b6b7ba',
+      borderColor: colorActive,
       padding: 10,
-      backgroundColor: colorActive ? '#5c6ef8' : '#b6b7ba',
+      backgroundColor: colorActive,
       textAlign: 'center',
       justifyContent: 'center',
     },
@@ -41,7 +43,7 @@ export const locationStyles = colorBorder => {
     },
     inputStyle: {
       marginTop: 45,
-      borderBottomColor: colorBorder ? '#5c6ef8' : '#b6b7ba',
+      borderBottomColor: colorBorder ? colors.purple : colors.disabled,
       borderBottomWidth: colorBorder ? 2 : 1,
     },
   });
@@ -65,7 +67,7 @@ export const reservationStyle = emptyR => {
       justifyContent: 'space-between',
     },
     planeIcon: {
-      color: '#5c6ef8',
+      color: colors.purple,
       display: emptyR ? 'none' : 'flex',
       position: 'absolute',
       left: screenWidth / 2 - 20,
@@ -109,7 +111,7 @@ export const passengersStyles = StyleSheet.create({
     alignItems: 'center',
   },
   iconStyle: {
-    color: '#5c6ef8',
+    color: colors.purple,
   },
   picker: {width: 100, height: 150, textAlign: 'center'},
   itemStyle: {color: 'black', fontSize: 26, fontWeight: 'bold'},

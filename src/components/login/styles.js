@@ -110,8 +110,6 @@ export const InputConfigurableStyles = StyleSheet.create({
   },
   textInput: {
     marginHorizontal: 5,
-    width: '80%',
-    height: 40,
     color: 'black',
     width: '88%',
     height: 40,

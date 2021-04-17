@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
+import {colors} from '../../library/styles/global';
 import {buttonNext} from './styles';
+
 const ButtonNext = ({
   functionNext,
   active,
@@ -8,7 +10,12 @@ const ButtonNext = ({
   round = false,
   position = 'relative',
 }) => {
-  const styles = buttonNext(20, active, round, position);
+  const styles = buttonNext(
+    20,
+    active ? colors.purple : colors.disabled,
+    round,
+    position,
+  );
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity

@@ -62,6 +62,7 @@ const listReservation = [
     passengers: 3,
   },
 ];
+
 const BookingList = props => {
   const next = () => {
     props.navigation.navigate('BookingFrom');
