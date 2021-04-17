@@ -14,7 +14,7 @@ const BookingResults = props => {
       <View style={resultContainer.result}>
         <Reservation
           {...props.route.params}
-          passengers={`${props.route.params.numberPassengers} passengers`}
+          passengers={`${props.route.params.numberPassengers}`}
         />
         <Text style={resultContainer.text}>Your request was received.</Text>
       </View>

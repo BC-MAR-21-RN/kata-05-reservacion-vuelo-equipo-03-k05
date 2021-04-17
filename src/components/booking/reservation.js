@@ -16,19 +16,19 @@ const Reservation = ({
       <View style={{...styles.cityContainer, ...styles.dpContainer}}>
         <View>
           <Text style={styles.begAms}>{origin.city ? 'BEG' : ''}</Text>
-          <Text style={styles.city}>{origin.city}</Text>
+          <Text style={styles.city}>{origin.country}</Text>
         </View>
         <FontAwesomeIcon icon={faPlane} style={styles.planeIcon} />
         <View>
           <Text style={{...styles.begAms, ...styles.ams}}>
             {destination.city ? 'AMS' : ''}
           </Text>
-          <Text style={styles.city}>{destination.city}</Text>
+          <Text style={styles.city}>{destination.country}</Text>
         </View>
       </View>
       <View style={styles.dpContainer}>
         <Text>{date}</Text>
-        <Text>{passengers}</Text>
+        <Text>{passengers ? `${passengers} passengers` : ''}</Text>
       </View>
     </View>
   );
