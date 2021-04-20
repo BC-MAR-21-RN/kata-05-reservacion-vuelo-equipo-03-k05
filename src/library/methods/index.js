@@ -1,3 +1,3 @@
-import {isValidEmail,isValidPassword} from './is';
+import {isValidEmail, isValidPassword} from './is';
 
-export {isValidEmail,isValidPassword};
+export {isValidEmail, isValidPassword};
