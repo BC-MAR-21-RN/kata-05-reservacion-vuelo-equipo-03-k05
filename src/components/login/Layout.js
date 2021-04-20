@@ -1,32 +1,45 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import InputsContainer from './InputsContainer';
-import {LayoutLoginStyles as styles} from './styles';
-import {useFormLoginController, useInputController} from '../../library/hooks';
 import ButtonContainer from './ButtonContainer';
-import {useLoginSingUp} from '../../library/hooks/useAuthenticationControl';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
-const LayoutLogin = () => {
+import {LayoutLoginStyles as styles} from './styles';
+import {
+  useFormLoginController,
+  useInputController,
+  useLoginSingUp,
+} from '../../library/hooks';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import {webClientId} from '../../library/constants/config';
+const LayoutLogin = props => {
   const [inputProps] = useInputController();
-  const [props] = useFormLoginController(inputProps);
+  const [loginProps] = useFormLoginController(inputProps);
   const [handleEmailAuthentication, handleAuthWithGoogle] = useLoginSingUp(
-    props.login,
+    loginProps.login,
     inputProps,
   );
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '804086227701-oehjq4d1tjq64fu07mfdgrdbtu8hm9l6.apps.googleusercontent.com',
+      webClientId: webClientId,
     });
   }, []);
+  auth().onAuthStateChanged(user => {
+    if (user) {
+      console.log('USUARIO====>', props);
+  
+        props.navigation.navigate('BookingFrom');
+   
+   
+    } else {
+    }
+  });
   return (
     <ScrollView style={styles.mainContainer}>
       <SafeAreaView />
-      <InputsContainer {...props} {...inputProps} />
+      <InputsContainer {...loginProps} {...inputProps} />
       <ButtonContainer
-        {...props}
+        {...loginProps}
         {...inputProps}
         handlePress={handleEmailAuthentication}
         handleAuthWithGoogle={handleAuthWithGoogle}

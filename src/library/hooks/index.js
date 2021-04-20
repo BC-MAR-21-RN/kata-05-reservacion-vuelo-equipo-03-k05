@@ -4,6 +4,7 @@ import {
   useFormLoginController,
   useInputController,
 } from './useFormLoginController';
+import {useLoginSingUp, useLogout} from './useAuthenticationControl';
 export {
   useInput,
   useLogin,
@@ -11,4 +12,6 @@ export {
   useCheckBox,
   useSingIn,
   useInputController,
+  useLoginSingUp,
+  useLogout,
 };
