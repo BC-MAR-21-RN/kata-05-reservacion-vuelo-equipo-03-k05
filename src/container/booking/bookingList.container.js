@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {View, FlatList, Text, BackHandler} from 'react-native';
 import {ButtonNext, Reservation} from '../../components/booking';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faPowerOff} from '@fortawesome/free-solid-svg-icons';
 import {general} from './styles';
 import {useBackButtonCustom, useLogout} from '../../library/hooks';
-
+import {StackActions} from '@react-navigation/native';
 const listReservation = [
   {
     id: 'id1',
@@ -24,12 +24,13 @@ const BookingList = props => {
     return <Reservation {...item} />;
   };
   const [logout] = useLogout(props);
-  useBackButtonCustom(props);
+
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
       <ButtonNext
-        name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
+      round={true}
+        name={<FontAwesomeIcon icon={faPowerOff} size={24} color="#FFF" />}
         functionNext={logout}
         active={true}
       />

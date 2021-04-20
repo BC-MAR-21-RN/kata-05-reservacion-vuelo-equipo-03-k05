@@ -11,6 +11,8 @@ import {
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import config from '../../library/constants/config.json';
+import {StackActions} from '@react-navigation/routers';
+
 const LayoutLogin = props => {
   const [inputProps] = useInputController();
   const [loginProps] = useFormLoginController(inputProps);
@@ -26,10 +28,9 @@ const LayoutLogin = props => {
   }, []);
 
   useEffect(() => {
-    console.log('HAS ENTERED USE EFECT');
     auth().onAuthStateChanged(user => {
       if (user) {
-        props.navigation.navigate('BookingList');
+        props.navigation.dispatch(StackActions.replace('BookingList'));
       } else {
       }
     });
