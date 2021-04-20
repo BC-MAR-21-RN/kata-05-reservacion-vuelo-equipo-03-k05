@@ -5,7 +5,7 @@ import {
   useInputController,
 } from './useFormLoginController';
 import {useLoginSingUp, useLogout} from './useAuthenticationControl';
-import {useBackButtonCustom} from './useReactNativeCustom'
+
 export {
   useInput,
   useLogin,
@@ -15,5 +15,4 @@ export {
   useInputController,
   useLoginSingUp,
   useLogout,
-  useBackButtonCustom
 };

@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import InputsContainer from './InputsContainer';
-import ButtonContainer from './ButtonContainer';
-import {LayoutLoginStyles as styles} from './styles';
 import {
   useFormLoginController,
   useInputController,
@@ -12,6 +9,8 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import config from '../../library/constants/config.json';
 import {StackActions} from '@react-navigation/routers';
+import {LayoutLoginStyles as styles} from '../../components/login';
+import {InputsContainer, ButtonContainer} from '..';
 
 const LayoutLogin = props => {
   const [inputProps] = useInputController();
