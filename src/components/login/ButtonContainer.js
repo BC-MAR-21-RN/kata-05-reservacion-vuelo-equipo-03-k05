@@ -8,7 +8,9 @@ const ButtonContainer = ({
   privacyProps,
   subscribeProps,
   permisionToInteract,
+  permisionSingUp,
   handlePress,
+  handleAuthWithGoogle,
   setLogin,
 }) => {
   return (
@@ -32,7 +34,8 @@ const ButtonContainer = ({
         />
         <Text>or</Text>
         <CustomButton
-          disabled={permisionToInteract}
+          onPress={async() => await handleAuthWithGoogle()}
+          disabled={permisionSingUp}
           text={login ? 'Log In with Google' : 'Sign Up with Google'}
         />
         <View style={styles.footerContainer}>

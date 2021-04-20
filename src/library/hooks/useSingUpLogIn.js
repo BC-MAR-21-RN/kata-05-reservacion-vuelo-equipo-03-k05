@@ -15,14 +15,7 @@ export const useLogin = (email, password) => {
 
 export const useSingIn = (user, email, password, privaci, subscribe) => {
   const [ableSingIn, setableSingIn] = useState(false);
-  console.log(
-    'data',
-    privaci,
-    subscribe,
-    Boolean(user),
-    isValidEmail(email),
-    isValidPassword(password),
-  );
+
   useEffect(() => {
     if (
       user &&
@@ -36,5 +29,16 @@ export const useSingIn = (user, email, password, privaci, subscribe) => {
     return setableSingIn(false);
   }, [user, email, password, privaci, subscribe]);
 
+  return [ableSingIn];
+};
+
+export const useSingInWithGoogle = (privaci, subscribe) => {
+  const [ableSingIn, setableSingIn] = useState(false);
+  useEffect(() => {
+    if (privaci && subscribe) {
+      return setableSingIn(true);
+    }
+    return setableSingIn(false);
+  }, [privaci, subscribe]);
   return [ableSingIn];
 };

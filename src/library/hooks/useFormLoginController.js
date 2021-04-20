@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useCheckBox, useInput, useLogin, useSingIn} from '.';
-
+import {useSingInWithGoogle} from './useSingUpLogIn';
 
 export const useFormLoginController = inputs => {
   const [ableLogIn] = useLogin(
@@ -14,8 +14,13 @@ export const useFormLoginController = inputs => {
     inputs.privacyProps.value,
     inputs.subscribeProps.value,
   );
+  const [ableSingInWithGoogle] = useSingInWithGoogle(
+    inputs.privacyProps.value,
+    inputs.subscribeProps.value,
+  );
   const [login, setLogin] = useState(false);
   const permisionToInteract = login ? !ableLogIn : !ableSingIn;
+  const permisionSingUp=login?false:!ableSingInWithGoogle
   const [isShowingPassword, setIsShowingPassword] = useState(false);
   return [
     {
@@ -25,6 +30,8 @@ export const useFormLoginController = inputs => {
       isShowingPassword,
       ableLogIn,
       ableSingIn,
+      permisionSingUp,
+      ableSingInWithGoogle,
       setIsShowingPassword,
     },
   ];
