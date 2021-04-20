@@ -10,7 +10,7 @@ import {
 } from '../../library/hooks';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
-import {webClientId} from '../../library/constants/config';
+import config from '../../library/constants/config.json';
 const LayoutLogin = props => {
   const [inputProps] = useInputController();
   const [loginProps] = useFormLoginController(inputProps);
@@ -21,19 +21,20 @@ const LayoutLogin = props => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: webClientId,
+      webClientId: config.webClientId,
     });
   }, []);
-  auth().onAuthStateChanged(user => {
-    if (user) {
-      console.log('USUARIO====>', props);
-  
-        props.navigation.navigate('BookingFrom');
-   
-   
-    } else {
-    }
-  });
+
+  useEffect(() => {
+    console.log('HAS ENTERED USE EFECT');
+    auth().onAuthStateChanged(user => {
+      if (user) {
+        props.navigation.navigate('BookingList');
+      } else {
+      }
+    });
+  }, []);
+
   return (
     <ScrollView style={styles.mainContainer}>
       <SafeAreaView />

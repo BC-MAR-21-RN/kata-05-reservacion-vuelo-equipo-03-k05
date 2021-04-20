@@ -1,5 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import { useState } from 'react';
 export const useLoginSingUp = (login, inputs) => {
   const handleEmailAuthentication = () => {
     if (login) {
@@ -56,8 +57,13 @@ const loginUserWithMail = () => {
     });
 };
 
-export const useLogout = () => {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
+export const useLogout = (props) => {
+  const logout = () => {
+    console.log('has logout');
+    auth()
+      .signOut()
+      .then(() => props.navigation.navigate('Login'));
+  };
+
+  return [logout];
 };
