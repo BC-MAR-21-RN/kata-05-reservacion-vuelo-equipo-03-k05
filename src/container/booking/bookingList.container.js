@@ -16,12 +16,7 @@ const BookingList = props => {
     props.navigation.navigate('BookingFrom');
   };
   const reservations = ({item}) => {
-    return (
-      <Reservation
-        {...item}
-        date={moment.unix(item.date.seconds).format('LL')}
-      />
-    );
+    return <Reservation key={item} {...item} />;
   };
   const [logout] = useLogout(props);
   const fetchData = () => {

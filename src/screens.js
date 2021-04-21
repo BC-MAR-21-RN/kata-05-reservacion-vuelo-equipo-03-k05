@@ -6,7 +6,7 @@ import {
   BookingDate,
   BookingPassenger,
   BookingResults,
-Login
+  Login,
 } from './container';
 
 import {NavigationContainer} from '@react-navigation/native';
