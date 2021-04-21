@@ -3,8 +3,6 @@ import {useEffect} from 'react';
 import config from '../constants/config.json';
 import auth from '@react-native-firebase/auth';
 import {StackActions} from '@react-navigation/routers';
-import firebase from '@react-native-firebase/app';
-import database from '@react-native-firebase/database';
 export const useConfigureGoogleSingin = () => {
   useEffect(() => {
     GoogleSignin.configure({

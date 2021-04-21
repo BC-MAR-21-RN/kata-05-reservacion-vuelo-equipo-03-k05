@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {
   useConfigureGoogleSingin,
-
   useFormLoginController,
   useInputController,
   useLoginSingUp,

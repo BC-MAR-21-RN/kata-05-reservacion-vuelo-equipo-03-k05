@@ -1,64 +1,64 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, FlatList, Text} from 'react-native';
 import {ButtonNext, Reservation} from '../../components/booking';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlus, faPowerOff} from '@fortawesome/free-solid-svg-icons';
 import {general} from './styles';
 import {useLogout} from '../../library/hooks';
+import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-const listReservation = [
-  {
-    id: 'id1',
-    origin: {city: 'Cartagena', country: 'Colombia'},
-    destination: {city: 'Tokio', country: 'Japan'},
-    date: 'December 22, 2021',
-    passengers: 3,
-  },
-];
+import moment from 'moment';
+import 'moment-timezone';
 
 const BookingList = props => {
+  const [data, setData] = useState([]);
   const next = () => {
     props.navigation.navigate('BookingFrom');
   };
   const reservations = ({item}) => {
-    return <Reservation {...item} />;
+    return (
+      <Reservation
+        {...item}
+        date={moment.unix(item.date.seconds).format('LL')}
+      />
+    );
   };
   const [logout] = useLogout(props);
-
-  useEffect(async () => {
-    const data = await firestore()
+  const fetchData = () => {
+    return firestore()
       .collection('reservas')
-      .doc('yEdleAGWQo9j6EUhISAi')
+      .doc(auth().currentUser.uid)
       .get()
       .then(documentSnapshot => {
         if (documentSnapshot.exists) {
-          var DATA = documentSnapshot.data()
-          console.log(DATA);
+          var DATA = documentSnapshot.data().flights;
+          setData(DATA);
         }
       });
-
-    console.log('data', data);
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
       <ButtonNext
-        round={true}
+        round
         name={<FontAwesomeIcon icon={faPowerOff} size={24} color="#FFF" />}
         functionNext={logout}
-        active={true}
+        active
       />
       <FlatList
-        data={listReservation}
+        data={data}
         renderItem={reservations}
         keyExtractor={item => item.id}
       />
       <ButtonNext
         position="absolute"
-        round={true}
+        round
         name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
         functionNext={next}
-        active={true}
+        active
       />
     </View>
   );
