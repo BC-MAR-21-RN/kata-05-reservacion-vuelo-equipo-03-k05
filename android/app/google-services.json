@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "804086227701",
+    "firebase_url": "https://flightreservation-3f14d-default-rtdb.firebaseio.com",
     "project_id": "flightreservation-3f14d",
     "storage_bucket": "flightreservation-3f14d.appspot.com"
   },

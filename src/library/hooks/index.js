@@ -5,7 +5,11 @@ import {
   useInputController,
 } from './useFormLoginController';
 import {useLoginSingUp, useLogout} from './useAuthenticationControl';
-
+import {
+  useOnAuthStatusChanged,
+  useConfigureGoogleSingin,
+  useFirebaseConfig
+} from './useFirebaseAuth';
 export {
   useInput,
   useLogin,
@@ -15,4 +19,7 @@ export {
   useInputController,
   useLoginSingUp,
   useLogout,
+  useConfigureGoogleSingin,
+  useOnAuthStatusChanged,
+  useFirebaseConfig
 };

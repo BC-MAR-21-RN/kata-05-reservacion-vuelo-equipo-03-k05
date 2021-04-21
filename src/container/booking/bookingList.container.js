@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, FlatList, Text, BackHandler} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import {ButtonNext, Reservation} from '../../components/booking';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlus, faPowerOff} from '@fortawesome/free-solid-svg-icons';
 import {general} from './styles';
-import {useBackButtonCustom, useLogout} from '../../library/hooks';
-import {StackActions} from '@react-navigation/native';
+import {useLogout} from '../../library/hooks';
+import firestore from '@react-native-firebase/firestore';
 const listReservation = [
   {
     id: 'id1',
@@ -25,11 +25,25 @@ const BookingList = props => {
   };
   const [logout] = useLogout(props);
 
+  useEffect(async () => {
+    const data = await firestore()
+      .collection('reservas')
+      .doc('yEdleAGWQo9j6EUhISAi')
+      .get()
+      .then(documentSnapshot => {
+        if (documentSnapshot.exists) {
+          var DATA = documentSnapshot.data()
+          console.log(DATA);
+        }
+      });
+
+    console.log('data', data);
+  }, []);
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
       <ButtonNext
-      round={true}
+        round={true}
         name={<FontAwesomeIcon icon={faPowerOff} size={24} color="#FFF" />}
         functionNext={logout}
         active={true}

@@ -18,7 +18,7 @@ export const useFormLoginController = inputs => {
     inputs.privacyProps.value,
     inputs.subscribeProps.value,
   );
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const permisionToInteract = login ? !ableLogIn : !ableSingIn;
   const permisionSingUp=login?false:!ableSingInWithGoogle
   const [isShowingPassword, setIsShowingPassword] = useState(false);
