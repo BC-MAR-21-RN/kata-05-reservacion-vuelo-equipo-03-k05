@@ -33,11 +33,11 @@ const BookingList = props => {
       .then(documentSnapshot => {
         if (documentSnapshot.exists) {
           var DATA = documentSnapshot.data()
-          console.log(DATA);
+
         }
       });
 
-    console.log('data', data);
+
   }, []);
   return (
     <View style={general.generalContainer}>
