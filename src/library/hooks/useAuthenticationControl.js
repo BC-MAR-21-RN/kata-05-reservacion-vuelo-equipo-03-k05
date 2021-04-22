@@ -13,7 +13,29 @@ export const useLoginSingUp = (login, inputs) => {
   const handleAuthWithGoogle = async () => {
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    return auth().signInWithCredential(googleCredential);
+    return auth()
+      .signInWithCredential(googleCredential)
+      .then(resp => {
+        console.log('RESPONSE=====>', resp);
+        firestore()
+          .collection('userData')
+          .doc(auth().currentUser.uid)
+          .set({
+            name: auth().currentUser.displayName,
+            privacityAccepted: inputs.privacyProps.value,
+            subscribed: inputs.subscribeProps.value,
+          })
+          .then(() => {
+            firestore()
+              .collection('reservas')
+              .doc(auth().currentUser.uid)
+              .set({flights: []});
+          })
+          .catch(errr => console.log('error', errr));
+      })
+      .catch(error => {
+        console.log('ERROR', error);
+      });
   };
   return [handleEmailAuthentication, handleAuthWithGoogle];
 };
@@ -36,14 +58,14 @@ const createUserWithMail = ({
 
   auth()
     .createUserWithEmailAndPassword(email, setBase64(password))
-    .then(resp => {
-      console.log('RESPONSE', resp);
-      console.log('user', auth().currentUser);
+    .then(() => {
       firestore()
         .collection('userData')
         .doc(auth().currentUser.uid)
         .set({
           name: name,
+          privacityAccepted: privacy,
+          subscribed: subscribed,
         })
         .then(() => {
           firestore()

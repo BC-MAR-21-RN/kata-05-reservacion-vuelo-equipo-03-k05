@@ -20,7 +20,7 @@ const LayoutLogin = props => {
   );
 
   useConfigureGoogleSingin();
-  useOnAuthStatusChanged(props);
+ //useOnAuthStatusChanged(props);
 
   return (
     <ScrollView style={styles.mainContainer}>

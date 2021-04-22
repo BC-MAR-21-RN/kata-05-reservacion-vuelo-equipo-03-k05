@@ -12,11 +12,11 @@ export const useFormLoginController = inputs => {
     inputs.emailProps.value,
     inputs.passwordProps.value,
     inputs.privacyProps.value,
-    inputs.subscribeProps.value,
+  
   );
   const [ableSingInWithGoogle] = useSingInWithGoogle(
     inputs.privacyProps.value,
-    inputs.subscribeProps.value,
+  
   );
   const [login, setLogin] = useState(true);
   const permisionToInteract = login ? !ableLogIn : !ableSingIn;
