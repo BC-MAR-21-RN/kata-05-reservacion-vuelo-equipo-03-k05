@@ -5,7 +5,9 @@ import {
   buttonContainerStyles,
   inputsContainerStyles,
   LayoutLoginStyles,
+  
 } from './styles';
+import ModalLayout from './modal'
 export {
   CustomButton,
   Checkbox,
@@ -13,4 +15,5 @@ export {
   buttonContainerStyles,
   inputsContainerStyles,
   LayoutLoginStyles,
+  ModalLayout
 };

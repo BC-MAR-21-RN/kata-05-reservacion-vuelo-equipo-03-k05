@@ -1,15 +1,35 @@
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import React from 'react';
-import {View} from 'react-native';
-
-const Modal = ({status}) => {
-  if (status) {
-    return <View>
-        <FontAwesomeIcon icon={faCheckCircle} size={24} color="#FFF" />
-    </View>;
+import React, {useEffect} from 'react';
+import auth from '@react-native-firebase/auth';
+import {
+  faCheckCircle,
+  faSpinner,
+  faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import {StackActions} from '@react-navigation/routers';
+import {ModalLayout} from '../../components/login';
+const ModalScreen = props => {
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (auth()?.currentUser?.uid) {
+        props.navigation.dispatch(StackActions.replace('BookingList'));
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [auth().currentUser]);
+  const {data, error, loading} = props;
+  if (data) {
+    return <ModalLayout icon={faCheckCircle} text={'Signed Up'} />;
   }
-  return <View></View>;
+
+  if (error) {
+    return <ModalLayout icon={faTimesCircle} text={'Cant sign up'} />;
+  }
+  if (loading) {
+    return <ModalLayout icon={faSpinner} text={'Signing up...'} />;
+  }
+  return <></>;
 };
 
-export default Modal;
+export default ModalScreen;

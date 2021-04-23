@@ -137,3 +137,23 @@ export const InputConfigurableStyles = StyleSheet.create({
     borderWidth: 2,
   },
 });
+
+export const modalStyles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    flex: 1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  infoContainer: {
+    backgroundColor: '#21252B',
+    paddingHorizontal: 20,
+    paddingVertical:20,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textModal:{
+    color:"#5c6ef8",
+    marginTop:10
+  }
+});

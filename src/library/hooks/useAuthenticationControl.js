@@ -2,7 +2,9 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {setBase64} from '../methods';
 import firestore from '@react-native-firebase/firestore';
+import {useState} from 'react';
 export const useLoginSingUp = (login, inputs) => {
+  const [state, setState] = useState({data: '', error: '', loading: false});
   const handleEmailAuthentication = () => {
     if (login) {
       loginUserWithMail();
@@ -11,12 +13,13 @@ export const useLoginSingUp = (login, inputs) => {
     }
   };
   const handleAuthWithGoogle = async () => {
+    setState({...state, loading: true});
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     return auth()
       .signInWithCredential(googleCredential)
       .then(resp => {
-        console.log('RESPONSE=====>', resp);
+        setState({...state, loading: false, data: resp});
         firestore()
           .collection('userData')
           .doc(auth().currentUser.uid)
@@ -31,13 +34,13 @@ export const useLoginSingUp = (login, inputs) => {
               .doc(auth().currentUser.uid)
               .set({flights: []});
           })
-          .catch(errr => console.log('error', errr));
+          .catch(errr => setState({...state, loading: false, error: errr}));
       })
       .catch(error => {
-        console.log('ERROR', error);
+        setState({...state, loading: false, error: error})
       });
   };
-  return [handleEmailAuthentication, handleAuthWithGoogle];
+  return [state, handleEmailAuthentication, handleAuthWithGoogle];
 };
 
 const createUserWithMail = ({
@@ -47,15 +50,6 @@ const createUserWithMail = ({
   privacyProps: {value: privacy},
   subscribeProps: {value: subscribed},
 }) => {
-  console.log(
-    'creatiingUser',
-    email,
-    name,
-    setBase64(password),
-    privacy,
-    subscribed,
-  );
-
   auth()
     .createUserWithEmailAndPassword(email, setBase64(password))
     .then(() => {
@@ -111,7 +105,7 @@ const loginUserWithMail = ({
 
 export const useLogout = props => {
   const logout = () => {
-    console.log('has logout');
+   
     auth()
       .signOut()
       .then(() => props.navigation.navigate('Login'));
