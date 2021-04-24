@@ -18,7 +18,7 @@ const LayoutLogin = props => {
     handleEmailAuthentication,
     handleAuthWithGoogle,
   ] = useLoginSingUp(loginProps.login, inputProps);
-  useConfigureGoogleSingin();
+  useConfigureGoogleSingin()
 
   return (
     <ScrollView style={styles.mainContainer}>
