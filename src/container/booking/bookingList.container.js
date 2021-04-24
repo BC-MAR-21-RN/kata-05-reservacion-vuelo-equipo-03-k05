@@ -5,7 +5,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlus, faPowerOff} from '@fortawesome/free-solid-svg-icons';
 import {general} from './styles';
 import {useLogout} from '../../library/hooks';
-import firestore from '@react-native-firebase/firestore';
 const listReservation = [
   {
     id: 'id1',
@@ -17,28 +16,7 @@ const listReservation = [
 ];
 
 const BookingList = props => {
-  const next = () => {
-    props.navigation.navigate('BookingFrom');
-  };
-  const reservations = ({item}) => {
-    return <Reservation {...item} />;
-  };
   const [logout] = useLogout(props);
-
-  useEffect(async () => {
-    const data = await firestore()
-      .collection('reservas')
-      .doc('yEdleAGWQo9j6EUhISAi')
-      .get()
-      .then(documentSnapshot => {
-        if (documentSnapshot.exists) {
-          var DATA = documentSnapshot.data()
-
-        }
-      });
-
-
-  }, []);
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
@@ -50,14 +28,16 @@ const BookingList = props => {
       />
       <FlatList
         data={listReservation}
-        renderItem={reservations}
+        renderItem={({item}) => <Reservation {...item} />}
         keyExtractor={item => item.id}
       />
       <ButtonNext
         position="absolute"
         round={true}
         name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
-        functionNext={next}
+        functionNext={() => {
+          props.navigation.navigate('BookingFrom');
+        }}
         active={true}
       />
     </View>
