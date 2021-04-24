@@ -7,7 +7,6 @@ import {general} from './styles';
 import {useLogout} from '../../library/hooks';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import moment from 'moment';
 import 'moment-timezone';
 
 const BookingList = props => {
@@ -20,19 +19,19 @@ const BookingList = props => {
   };
   const [logout] = useLogout(props);
   const fetchData = () => {
-    return firestore()
+    return;
+  };
+  useEffect(() => {
+    const unsubscribeListener = firestore()
       .collection('reservas')
       .doc(auth().currentUser.uid)
-      .get()
-      .then(documentSnapshot => {
-        if (documentSnapshot.exists) {
+      .onSnapshot(documentSnapshot => {
+        if (documentSnapshot) {
           var DATA = documentSnapshot.data().flights;
           setData(DATA);
         }
       });
-  };
-  useEffect(() => {
-    fetchData();
+    return () => unsubscribeListener();
   }, []);
   return (
     <View style={general.generalContainer}>

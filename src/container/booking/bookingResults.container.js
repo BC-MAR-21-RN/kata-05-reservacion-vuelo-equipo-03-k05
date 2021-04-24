@@ -20,14 +20,14 @@ const BookingResults = ({route, navigation}) => {
       .get()
       .then(documentSnapshot => {
         if (documentSnapshot.exists) {
-          var userData = documentSnapshot.data();
-          newData.id = userData.flights.length.toString();
-          userData.flights.push(newData);
+          var collectionData = documentSnapshot.data();
+          newData.id = collectionData.flights.length.toString();
+          collectionData.flights.push(newData);
 
           firestore()
             .collection('reservas')
             .doc(auth().currentUser.uid)
-            .set(userData);
+            .set(collectionData);
           navigation.navigate('BookingList');
         }
       });
