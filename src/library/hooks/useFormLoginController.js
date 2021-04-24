@@ -1,36 +1,32 @@
 import {useState} from 'react';
-import {useCheckBox, useInput, useLogin, useSingIn} from '.';
-import {useSingInWithGoogle} from './useSingUpLogIn';
+import {
+  useCheckBox,
+  useInput,
+  useValidationsLogin,
+  useValidationsSingIn,
+  useValidationsSingInWithGoogle,
+} from '.';
 
-export const useFormLoginController = inputs => {
-  const [ableLogIn] = useLogin(
-    inputs.emailProps.value,
-    inputs.passwordProps.value,
-  );
-  const [ableSingIn] = useSingIn(
-    inputs.nameProps.value,
-    inputs.emailProps.value,
-    inputs.passwordProps.value,
-    inputs.privacyProps.value,
-  
-  );
-  const [ableSingInWithGoogle] = useSingInWithGoogle(
-    inputs.privacyProps.value,
-  
-  );
+export const useFormLoginController = ({
+  nameProps: {value: name},
+  emailProps: {value: email},
+  passwordProps: {value: password},
+  privacyProps: {value: privacy},
+}) => {
+  const [ableLogIn] = useValidationsLogin(email, password);
+  const [ableSingIn] = useValidationsSingIn(name, email, password, privacy);
+  const [ableSingInWithGoogle] = useValidationsSingInWithGoogle(privacy);
   const [login, setLogin] = useState(true);
-  const permisionToInteract = login ? !ableLogIn : !ableSingIn;
-  const permisionSingUp=login?false:!ableSingInWithGoogle
   const [isShowingPassword, setIsShowingPassword] = useState(false);
   return [
     {
       login,
       setLogin,
-      permisionToInteract,
+      permisionToInteract: login ? !ableLogIn : !ableSingIn,
       isShowingPassword,
       ableLogIn,
       ableSingIn,
-      permisionSingUp,
+      permisionSingUp: login ? false : !ableSingInWithGoogle,
       ableSingInWithGoogle,
       setIsShowingPassword,
     },

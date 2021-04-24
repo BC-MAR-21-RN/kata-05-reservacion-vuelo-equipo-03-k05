@@ -1,5 +1,9 @@
 import {useInput, useCheckBox} from './useInput';
-import {useLogin, useSingIn} from './useSingUpLogIn';
+import {
+  useValidationsLogin,
+  useValidationsSingIn,
+  useValidationsSingInWithGoogle,
+} from './useValidations';
 import {
   useFormLoginController,
   useInputController,
@@ -8,18 +12,17 @@ import {useLoginSingUp, useLogout} from './useAuthenticationControl';
 import {
   useOnAuthStatusChanged,
   useConfigureGoogleSingin,
-  useFirebaseConfig
 } from './useFirebaseAuth';
 export {
   useInput,
-  useLogin,
   useFormLoginController,
   useCheckBox,
-  useSingIn,
   useInputController,
   useLoginSingUp,
   useLogout,
   useConfigureGoogleSingin,
   useOnAuthStatusChanged,
-  useFirebaseConfig
+  useValidationsLogin,
+  useValidationsSingIn,
+  useValidationsSingInWithGoogle,
 };
