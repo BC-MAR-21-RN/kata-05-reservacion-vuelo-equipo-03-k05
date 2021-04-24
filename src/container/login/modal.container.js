@@ -20,14 +20,29 @@ const ModalScreen = props => {
   }, [auth().currentUser]);
   const {data, error, loading} = props;
   if (data) {
-    return <ModalLayout icon={faCheckCircle} text={'Signed Up'} />;
+    return (
+      <ModalLayout
+        icon={faCheckCircle}
+        text={props.login ? 'Logged In' : 'Signed Up'}
+      />
+    );
   }
 
   if (error) {
-    return <ModalLayout icon={faTimesCircle} text={'Cant sign up'} />;
+    return (
+      <ModalLayout
+        icon={faTimesCircle}
+        text={props.login ? "Can't Log in" : "Can't sign up"}
+      />
+    );
   }
   if (loading) {
-    return <ModalLayout icon={faSpinner} text={'Signing up...'} />;
+    return (
+      <ModalLayout
+        icon={faSpinner}
+        text={props.login ? 'Logging In...' : 'Signing up...'}
+      />
+    );
   }
   return <></>;
 };
