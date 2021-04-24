@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "804086227701",
+    "firebase_url": "https://flightreservation-3f14d-default-rtdb.firebaseio.com",
+    "project_id": "flightreservation-3f14d",
+    "storage_bucket": "flightreservation-3f14d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804086227701:android:cd34c7ea08ae96a2e2dbbc",
+        "android_client_info": {
+          "package_name": "com.fights"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804086227701-m51nn0uqsddt8otn43l0j693bp740516.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fights",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "804086227701-oehjq4d1tjq64fu07mfdgrdbtu8hm9l6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjsUuO543MP-VKQmkUFzcLTC7hL4PI4I0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804086227701-oehjq4d1tjq64fu07mfdgrdbtu8hm9l6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

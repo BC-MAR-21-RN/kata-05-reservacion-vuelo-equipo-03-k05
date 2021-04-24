@@ -1,14 +1,32 @@
 import {useInput, useCheckBox} from './useInput';
-import {useLogin, useSingIn} from './useSingUpLogIn';
+import {
+  useValidationsLogin,
+  useValidationsSingIn,
+  useValidationsSingInWithGoogle,
+} from './useValidations';
 import {
   useFormLoginController,
   useInputController,
 } from './useFormLoginController';
+import {useLoginSingUp, useLogout} from './useAuthenticationControl';
+import {
+  useOnAuthStatusChanged,
+  useConfigureGoogleSingin,
+} from './useFirebaseAuth';
+import {useRedirect} from './useRedirect';
+import {useChoseModalProps}from './useChoseModalProps'
 export {
   useInput,
-  useLogin,
   useFormLoginController,
   useCheckBox,
-  useSingIn,
   useInputController,
+  useLoginSingUp,
+  useLogout,
+  useConfigureGoogleSingin,
+  useOnAuthStatusChanged,
+  useValidationsLogin,
+  useValidationsSingIn,
+  useValidationsSingInWithGoogle,
+  useRedirect,
+  useChoseModalProps
 };

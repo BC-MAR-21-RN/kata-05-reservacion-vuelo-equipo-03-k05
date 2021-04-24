@@ -1,14 +1,19 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import Checkbox from './Checkbox';
-import CustomButton from './Button';
-import {buttonContainerStyles as styles} from './styles';
+import {
+  CustomButton,
+  Checkbox,
+  buttonContainerStyles as styles,
+} from '../../components/login';
+
 const ButtonContainer = ({
   login,
   privacyProps,
   subscribeProps,
   permisionToInteract,
+  permisionSingUp,
   handlePress,
+  handleAuthWithGoogle,
   setLogin,
 }) => {
   return (
@@ -32,7 +37,8 @@ const ButtonContainer = ({
         />
         <Text>or</Text>
         <CustomButton
-          disabled={permisionToInteract}
+          onPress={async () => await handleAuthWithGoogle()}
+          disabled={permisionSingUp}
           text={login ? 'Log In with Google' : 'Sign Up with Google'}
         />
         <View style={styles.footerContainer}>
