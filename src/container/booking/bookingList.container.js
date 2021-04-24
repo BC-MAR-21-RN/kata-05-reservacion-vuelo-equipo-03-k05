@@ -15,8 +15,8 @@ const listReservation = [
   },
 ];
 
-const BookingList = props => {
-  const [logout] = useLogout(props);
+const BookingList = ({navigation: {navigate}}) => {
+  const [logout] = useLogout(navigate);
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
@@ -35,9 +35,7 @@ const BookingList = props => {
         position="absolute"
         round={true}
         name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
-        functionNext={() => {
-          props.navigation.navigate('BookingFrom');
-        }}
+        functionNext={() => navigate('BookingFrom')}
         active={true}
       />
     </View>

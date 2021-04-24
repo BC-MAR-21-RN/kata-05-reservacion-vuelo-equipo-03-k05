@@ -79,11 +79,11 @@ const createAditionalData = (resp, state, setState, inputs) => {
     .catch(errr => setState({...state, loading: false, error: errr}));
 };
 
-export const useLogout = props => {
+export const useLogout = navigate => {
   const logout = () => {
     auth()
       .signOut()
-      .then(() => props.navigation.navigate('Login'));
+      .then(() => navigate('Login'));
   };
 
   return [logout];
