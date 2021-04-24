@@ -7,20 +7,14 @@ import {general} from './styles';
 import {useLogout} from '../../library/hooks';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import 'moment-timezone';
 
 const BookingList = props => {
   const [data, setData] = useState([]);
-  const next = () => {
-    props.navigation.navigate('BookingFrom');
-  };
   const reservations = ({item}) => {
     return <Reservation key={item} {...item} />;
   };
   const [logout] = useLogout(props);
-  const fetchData = () => {
-    return;
-  };
+
   useEffect(() => {
     const unsubscribeListener = firestore()
       .collection('reservas')
@@ -51,8 +45,8 @@ const BookingList = props => {
         position="absolute"
         round
         name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
-        functionNext={next}
-        active
+        functionNext={() => props.navigation.navigate('BookingFrom')}
+        active={true}
       />
     </View>
   );

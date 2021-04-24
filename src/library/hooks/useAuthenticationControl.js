@@ -1,68 +1,89 @@
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import { useState } from 'react';
+import {setBase64} from '../methods';
+import firestore from '@react-native-firebase/firestore';
+import {useEffect, useState} from 'react';
 export const useLoginSingUp = (login, inputs) => {
+  const [state, setState] = useState({data: '', error: '', loading: false});
+  useEffect(() => {
+    setState({...state, login});
+  }, [login]);
   const handleEmailAuthentication = () => {
-    if (login) {
-      loginUserWithMail();
-    } else {
-      createUserWithMail();
-    }
+    login
+      ? loginUserWithMail(inputs, state, setState)
+      : createUserWithMail(inputs, state, setState);
   };
   const handleAuthWithGoogle = async () => {
+    setState({...state, loading: true});
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    return auth().signInWithCredential(googleCredential);
+    return auth()
+      .signInWithCredential(googleCredential)
+      .then(resp => {
+        createAditionalData(resp, state, setState, inputs);
+      })
+      .catch(error => {
+        setState({...state, loading: false, error: error});
+      });
   };
-  return [handleEmailAuthentication, handleAuthWithGoogle];
+  return [state, handleEmailAuthentication, handleAuthWithGoogle];
 };
 
-const createUserWithMail = () => {
+const createUserWithMail = (inputs, state, setState) => {
+  const {
+    emailProps: {value: email},
+    passwordProps: {value: password},
+  } = inputs;
+  setState({...state, loading: true});
   auth()
-    .createUserWithEmailAndPassword(
-      'jane.doe@example.com',
-      'SuperSecretPassword!',
-    )
-    .then(() => {
-      console.log('User account created & signed in!');
+    .createUserWithEmailAndPassword(email, setBase64(password))
+    .then(resp => {
+      createAditionalData(resp, state, setState, inputs);
     })
     .catch(error => {
-      if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
-      }
-
-      if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
-      }
-
-      console.error(error);
+      setState({...state, loading: false, error: error});
     });
 };
-const loginUserWithMail = () => {
+const loginUserWithMail = (
+  {emailProps: {value: email}, passwordProps: {value: password}},
+  state,
+  setState,
+) => {
+  setState({...state, loading: true});
   auth()
-    .signInWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
-    .then(() => {
-      console.log('User account created & signed in!');
+    .signInWithEmailAndPassword(email, setBase64(password))
+    .then(resp => {
+      setState({...state, loading: false, data: resp});
     })
     .catch(error => {
-      if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
-      }
-
-      if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
-      }
-
-      console.error(error);
+      setState({...state, loading: false, error: error});
     });
 };
 
-export const useLogout = (props) => {
+const createAditionalData = (resp, state, setState, inputs) => {
+  setState({...state, loading: false, data: resp});
+  firestore()
+    .collection('userData')
+    .doc(auth().currentUser.uid)
+    .set({
+      name: auth().currentUser.displayName,
+      privacityAccepted: inputs.privacyProps.value,
+      subscribed: inputs.subscribeProps.value,
+    })
+    .then(() => {
+      firestore()
+        .collection('reservas')
+        .doc(auth().currentUser.uid)
+        .set({flights: []});
+    })
+    .catch(errr => setState({...state, loading: false, error: errr}));
+};
+
+export const useLogout = navigate => {
   const logout = () => {
-    console.log('has logout');
     auth()
       .signOut()
-      .then(() => props.navigation.navigate('Login'));
+      .then(() => navigate('Login'));
   };
 
   return [logout];
