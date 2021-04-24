@@ -11,6 +11,7 @@ const ModalScreen = props => {
   const {data, error, loading, login} = props;
 
   const newProps = () => {
+    console.log("DATA",data, error, loading,);
     if (data) {
       return {icon: faCheckCircle, text: login ? 'Logged In' : 'Signed Up'};
     } else if (error) {
@@ -23,13 +24,14 @@ const ModalScreen = props => {
         icon: faSpinner,
         text: login ? 'Logging In...' : 'Signing up...',
       };
+    } else {
+      return '';
     }
-    return '';
   };
 
-  if (!newProps) return <></>;
+if (!newProps())return <></>;
 
-  return <ModalLayout {...newProps} />;
+ return <ModalLayout {...newProps()} />;
 };
 
 export default ModalScreen;
