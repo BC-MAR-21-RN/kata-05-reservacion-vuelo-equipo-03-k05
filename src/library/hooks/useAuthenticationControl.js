@@ -9,11 +9,9 @@ export const useLoginSingUp = (login, inputs) => {
     setState({...state, login});
   }, [login]);
   const handleEmailAuthentication = () => {
-    if (login) {
-      loginUserWithMail(inputs, state, setState);
-    } else {
-      createUserWithMail(inputs, state, setState);
-    }
+    login
+      ? loginUserWithMail(inputs, state, setState)
+      : createUserWithMail(inputs, state, setState);
   };
   const handleAuthWithGoogle = async () => {
     setState({...state, loading: true});
@@ -22,22 +20,7 @@ export const useLoginSingUp = (login, inputs) => {
     return auth()
       .signInWithCredential(googleCredential)
       .then(resp => {
-        setState({...state, loading: false, data: resp});
-        firestore()
-          .collection('userData')
-          .doc(auth().currentUser.uid)
-          .set({
-            name: auth().currentUser.displayName,
-            privacityAccepted: inputs.privacyProps.value,
-            subscribed: inputs.subscribeProps.value,
-          })
-          .then(() => {
-            firestore()
-              .collection('reservas')
-              .doc(auth().currentUser.uid)
-              .set({flights: []});
-          })
-          .catch(errr => setState({...state, loading: false, error: errr}));
+        createAditionalData(resp, state, setState, inputs);
       })
       .catch(error => {
         setState({...state, loading: false, error: error});
@@ -46,50 +29,23 @@ export const useLoginSingUp = (login, inputs) => {
   return [state, handleEmailAuthentication, handleAuthWithGoogle];
 };
 
-const createUserWithMail = (
-  {
+const createUserWithMail = (inputs, state, setState) => {
+  const {
     emailProps: {value: email},
-    nameProps: {value: name},
     passwordProps: {value: password},
-    privacyProps: {value: privacy},
-    subscribeProps: {value: subscribed},
-  },
-  state,
-  setState,
-) => {
+  } = inputs;
   setState({...state, loading: true});
   auth()
     .createUserWithEmailAndPassword(email, setBase64(password))
     .then(resp => {
-      setState({...state, loading: false, data: resp});
-      firestore()
-        .collection('userData')
-        .doc(auth().currentUser.uid)
-        .set({
-          name: name,
-          privacityAccepted: privacy,
-          subscribed: subscribed,
-        })
-        .then(() => {
-          firestore()
-            .collection('reservas')
-            .doc(auth().currentUser.uid)
-            .set({flights: []});
-        })
-        .catch(error => {
-          setState({...state, loading: false, error: error});
-        });
+      createAditionalData(resp, state, setState, inputs);
     })
     .catch(error => {
       setState({...state, loading: false, error: error});
     });
 };
 const loginUserWithMail = (
-  {
-    emailProps: {value: email},
-
-    passwordProps: {value: password},
-  },
+  {emailProps: {value: email}, passwordProps: {value: password}},
   state,
   setState,
 ) => {
@@ -102,6 +58,25 @@ const loginUserWithMail = (
     .catch(error => {
       setState({...state, loading: false, error: error});
     });
+};
+
+const createAditionalData = (resp, state, setState, inputs) => {
+  setState({...state, loading: false, data: resp});
+  firestore()
+    .collection('userData')
+    .doc(auth().currentUser.uid)
+    .set({
+      name: auth().currentUser.displayName,
+      privacityAccepted: inputs.privacyProps.value,
+      subscribed: inputs.subscribeProps.value,
+    })
+    .then(() => {
+      firestore()
+        .collection('reservas')
+        .doc(auth().currentUser.uid)
+        .set({flights: []});
+    })
+    .catch(errr => setState({...state, loading: false, error: errr}));
 };
 
 export const useLogout = props => {

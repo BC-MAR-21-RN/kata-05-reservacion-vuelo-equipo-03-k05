@@ -24,11 +24,11 @@ export const useFormLoginController = ({
       setLogin,
       permisionToInteract: login ? !ableLogIn : !ableSingIn,
       isShowingPassword,
+      setIsShowingPassword,
       ableLogIn,
       ableSingIn,
       permisionSingUp: login ? false : !ableSingInWithGoogle,
       ableSingInWithGoogle,
-      setIsShowingPassword,
     },
   ];
 };
