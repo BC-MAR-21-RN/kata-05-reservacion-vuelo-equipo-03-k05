@@ -10,28 +10,24 @@ const ModalScreen = props => {
   useRedirect(props);
   const {data, error, loading, login} = props;
 
-  const newProps = () => {
-    console.log("DATA",data, error, loading,);
-    if (data) {
-      return {icon: faCheckCircle, text: login ? 'Logged In' : 'Signed Up'};
-    } else if (error) {
-      return {
-        icon: faTimesCircle,
-        text: login ? "Can't Log in" : "Can't sign up",
-      };
-    } else if (loading) {
-      return {
-        icon: faSpinner,
-        text: login ? 'Logging In...' : 'Signing up...',
-      };
-    } else {
-      return '';
-    }
-  };
-
-if (!newProps())return <></>;
-
- return <ModalLayout {...newProps()} />;
+  if (!data && !error && !loading) return <></>;
+  return (
+    <ModalLayout
+      {...(data
+        ? {icon: faCheckCircle, text: login ? 'Logged In' : 'Signed Up'}
+        : error
+        ? {
+            icon: faTimesCircle,
+            text: login ? "Can't Log in" : "Can't sign up",
+          }
+        : loading
+        ? {
+            icon: faSpinner,
+            text: login ? 'Logging In...' : 'Signing up...',
+          }
+        : null)}
+    />
+  );
 };
 
 export default ModalScreen;
