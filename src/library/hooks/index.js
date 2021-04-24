@@ -13,6 +13,7 @@ import {
   useOnAuthStatusChanged,
   useConfigureGoogleSingin,
 } from './useFirebaseAuth';
+import {useRedirect} from './useRedirect';
 export {
   useInput,
   useFormLoginController,
@@ -25,4 +26,5 @@ export {
   useValidationsLogin,
   useValidationsSingIn,
   useValidationsSingInWithGoogle,
+  useRedirect,
 };
