@@ -14,7 +14,8 @@ import {
   useConfigureGoogleSingin,
 } from './useFirebaseAuth';
 import {useRedirect} from './useRedirect';
-import {useChoseModalProps}from './useChoseModalProps'
+import {useChoseModalProps}from './useChoseModalProps';
+import {useFirebaseGet} from './useFirebaseAPI';
 export {
   useInput,
   useFormLoginController,
@@ -28,5 +29,6 @@ export {
   useValidationsSingIn,
   useValidationsSingInWithGoogle,
   useRedirect,
-  useChoseModalProps
+  useChoseModalProps,
+  useFirebaseGet,
 };

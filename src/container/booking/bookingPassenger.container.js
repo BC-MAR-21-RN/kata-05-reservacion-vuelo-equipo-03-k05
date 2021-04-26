@@ -8,7 +8,7 @@ const BookingPassenger = props => {
   const next = () => {
     props.navigation.navigate('BookingResults', {
       ...props.route.params,
-      numberPassengers: selectedItem + 1,
+      passengers: selectedItem + 1,
     });
   };
   const passengerChange = item => {

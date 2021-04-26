@@ -1,43 +1,27 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, FlatList, Text} from 'react-native';
-import {ButtonNext, Reservation} from '../../components/booking';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faPlus, faPowerOff} from '@fortawesome/free-solid-svg-icons';
+import {WrapperFlights, Reservation} from '../../components/booking';
 import {general} from './styles';
-import {useLogout} from '../../library/hooks';
-const listReservation = [
-  {
-    id: 'id1',
-    origin: {city: 'Cartagena', country: 'Colombia'},
-    destination: {city: 'Tokio', country: 'Japan'},
-    date: 'December 22, 2021',
-    passengers: 3,
-  },
-];
+import {useLogout, useFirebaseGet} from '../../library/hooks';
+import auth from '@react-native-firebase/auth';
 
-const BookingList = ({navigation: {navigate}}) => {
-  const [logout] = useLogout(navigate);
+const BookingList = props => {
+  const [data, setData] = useState([]);
+  const reservations = ({item}) => {
+    return <Reservation key={item} {...item} />;
+  };
+  const [logout] = useLogout(props.navigation.navigate);
+  useFirebaseGet(auth().currentUser.uid, setData, 'reservas', 'flights');
   return (
     <View style={general.generalContainer}>
       <Text style={general.tittle}>My flights</Text>
-      <ButtonNext
-        round={true}
-        name={<FontAwesomeIcon icon={faPowerOff} size={24} color="#FFF" />}
-        functionNext={logout}
-        active={true}
-      />
-      <FlatList
-        data={listReservation}
-        renderItem={({item}) => <Reservation {...item} />}
-        keyExtractor={item => item.id}
-      />
-      <ButtonNext
-        position="absolute"
-        round={true}
-        name={<FontAwesomeIcon icon={faPlus} size={24} color="#FFF" />}
-        functionNext={() => navigate('BookingFrom')}
-        active={true}
-      />
+      <WrapperFlights navigate={props.navigation.navigate} logout={logout}>
+        <FlatList
+          data={data}
+          renderItem={reservations}
+          keyExtractor={item => item.id}
+        />
+      </WrapperFlights>
     </View>
   );
 };
