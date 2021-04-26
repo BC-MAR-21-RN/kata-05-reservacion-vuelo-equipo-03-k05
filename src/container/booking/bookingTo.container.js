@@ -20,7 +20,6 @@ const BookingTo = props => {
           <Reservation {...props.route.params} />
           <Location
             text="Where will you be flying to?"
-            inputState={location}
             setActive={setActive}
             setLocation={setLocation}
             active={active}
