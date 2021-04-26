@@ -74,7 +74,17 @@ const createAditionalData = (resp, state, setState, inputs) => {
       firestore()
         .collection('reservas')
         .doc(auth().currentUser.uid)
-        .set({flights: []});
+        .get()
+        .then(resp => {
+          if (!resp.exists) {
+            firestore()
+              .collection('reservas')
+              .doc(auth().currentUser.uid)
+              .set({
+                flights: [],
+              });
+          }
+        })
     })
     .catch(errr => setState({...state, loading: false, error: errr}));
 };
