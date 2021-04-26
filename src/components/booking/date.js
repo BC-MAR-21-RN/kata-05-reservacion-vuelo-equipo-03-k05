@@ -8,13 +8,14 @@ const Date = ({dateChange}) => {
   return (
     <View>
       <Text style={dateStyle.text}>Select date</Text>
-      <CalendarPicker
-        previousTitle={
+      <CalendarPicker 
+        previousComponent={
           <FontAwesomeIcon icon={faAngleLeft} size={24} color="#5c6ef8" />
         }
-        nextTitle={
+        nextComponent={
           <FontAwesomeIcon icon={faAngleRight} size={24} color="#5c6ef8" />
         }
+        
         weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
         onDateChange={date => dateChange(date)}
       />

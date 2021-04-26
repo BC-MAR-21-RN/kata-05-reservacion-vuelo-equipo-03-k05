@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {ButtonNext, Reservation, Date} from '../../components/booking';
+import {ButtonNext, Reservation, Date as DateComponent} from '../../components/booking';
 import {general} from './styles';
 import moment from 'moment';
 
@@ -9,7 +9,7 @@ const BookingDate = props => {
   const next = () => {
     props.navigation.navigate('BookingPassenger', {
       ...props.route.params,
-      date: moment(dateSelected).format('LL'),
+      date:moment(new Date(dateSelected)).format('LL'),
     });
   };
   const dateChange = date => {
@@ -18,7 +18,7 @@ const BookingDate = props => {
   return (
     <View style={general.generalContainer}>
       <Reservation {...props.route.params} />
-      <Date dateChange={dateChange} />
+      <DateComponent dateChange={dateChange} />
       <ButtonNext functionNext={next} active={dateSelected} />
     </View>
   );
