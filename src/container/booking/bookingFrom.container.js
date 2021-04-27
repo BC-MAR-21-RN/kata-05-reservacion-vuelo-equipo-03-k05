@@ -17,7 +17,6 @@ const BookingFrom = props => {
           <Reservation emptyR={true} />
           <Location
             text="Where are you now?"
-            inputState={location}
             setActive={setActive}
             setLocation={setLocation}
             active={active}

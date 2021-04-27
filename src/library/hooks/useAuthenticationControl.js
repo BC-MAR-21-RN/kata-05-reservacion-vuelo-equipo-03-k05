@@ -71,13 +71,27 @@ const createAditionalData = (resp, state, setState, inputs) => {
       subscribed: inputs.subscribeProps.value,
     })
     .then(() => {
-      firestore()
-        .collection('reservas')
-        .doc(auth().currentUser.uid)
-        .set({flights: []});
+      findAdditionalData()
     })
     .catch(errr => setState({...state, loading: false, error: errr}));
 };
+
+const findAdditionalData=()=>{
+  firestore()
+  .collection('reservas')
+  .doc(auth().currentUser.uid)
+  .get()
+  .then(resp => {
+    if (!resp.exists) {
+      firestore()
+        .collection('reservas')
+        .doc(auth().currentUser.uid)
+        .set({
+          flights: [],
+        });
+    }
+  })
+}
 
 export const useLogout = navigate => {
   const logout = () => {
